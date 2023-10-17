@@ -1,57 +1,33 @@
-class Account {
+class Ride {
 
-    nickname?: string; //optional property - ?
+    //static members are specific to class and not its objects
+    //single instance in memory
+    private static _activeRides: number = 0
 
-    //access specifier to constructor parameter to reduce code
-    constructor(
-        public readonly id: number,
-        public owner: string,
-        private _balance: number
-    ) { }
 
-    deposit(amount: number) {
-        if (amount < 0)
-            throw new Error('Invalid Amount')
-        this._balance += amount
+    start() {
+        Ride._activeRides++;
     }
 
-    //balance getter
-    get balance(): number {
-        return this._balance
+    stop() {
+        Ride._activeRides--;
     }
 
-    //balance setter
-    set balance(value: number) {
-        if (value < 0)
-            throw new Error('Invalid Amount')
-        this._balance = value
+    //make getter of static property static too
+    static get activeRides(): number {
+        return Ride._activeRides;
     }
 
 }
 
 const main = () => {
+    const ride1 = new Ride()
+    const ride2 = new Ride()
 
-    try {
-        const account = new Account(1, 'vineeth', 100)
+    ride1.start()
+    ride2.start()
 
-        //error - id is readonly
-        // account.id =  2
-
-        //error - balance is private to Account
-        // console.log(account._balance)
-
-        account.balance = 30 //balance setter
-
-        console.log(account.balance) //getter access
-
-        console.log(account)
-        console.log(account instanceof Account)
-    }
-    catch (err) {
-        console.log(err)
-    }
-
-
+    console.log(Ride.activeRides); // 2
 
 }
 
