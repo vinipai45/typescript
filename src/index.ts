@@ -1,34 +1,50 @@
-class Ride {
+//BASE
+class Person {
+    constructor(
+        public firstName: string,
+        public lastName: string,
+    ) { }
 
-    //static members are specific to class and not its objects
-    //single instance in memory
-    private static _activeRides: number = 0
-
-
-    start() {
-        Ride._activeRides++;
+    get fullName(): string {
+        return this.fullName + ' ' + this.lastName
     }
 
-    stop() {
-        Ride._activeRides--;
-    }
-
-    //make getter of static property static too
-    static get activeRides(): number {
-        return Ride._activeRides;
+    walk(): void {
+        console.log('walking')
     }
 
 }
 
+//DERIVED
+
+class Student extends Person {
+    constructor(
+        public studentId: number,
+        firstName: string,
+        lastName: string
+    ) {
+        super(firstName, lastName)
+    }
+
+    takeTest(): void {
+        console.log('taking a test')
+    }
+}
+
 const main = () => {
-    const ride1 = new Ride()
-    const ride2 = new Ride()
+    const student = new Student(1, 'Vineeth', 'Pai')
 
-    ride1.start()
-    ride2.start()
+    //all these properties are available
 
-    console.log(Ride.activeRides); // 2
+    // student.firstName
+    // student.lastName
+    // student.fullName
+    // student.studentId
+    // student.takeTest()
+    // student.walk()
 
 }
 
 main()
+
+
