@@ -13,25 +13,19 @@ class Person {
     }
 }
 //DERIVED
-class Student extends Person {
-    constructor(studentId, firstName, lastName) {
-        super(firstName, lastName);
-        this.studentId = studentId;
-    }
-    takeTest() {
-        console.log('taking a test');
+class Teacher extends Person {
+    get fullName() {
+        return 'Professor' + super.fullName;
     }
 }
 const main = () => {
-    const student = new Student(1, 'Vineeth', 'Pai');
-    //all these properties are available
-    console.log(student.fullName);
-    // student.firstName
-    // student.lastName
-    // student.fullName
-    // student.studentId
-    // student.takeTest()
-    // student.walk()
+    try {
+        const teacher = new Teacher('John', 'Smith');
+        console.log(teacher.fullName);
+    }
+    catch (err) {
+        console.log(err);
+    }
 };
 main();
 //# sourceMappingURL=index.js.map

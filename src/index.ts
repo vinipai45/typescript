@@ -17,34 +17,26 @@ class Person {
 
 //DERIVED
 
-class Student extends Person {
-    constructor(
-        public studentId: number,
-        firstName: string,
-        lastName: string
-    ) {
-        super(firstName, lastName)
-    }
+class Teacher extends Person {
 
-    takeTest(): void {
-        console.log('taking a test')
+    override get fullName(): string {
+        return 'Professor' + ' ' + super.fullName
     }
 }
 
 const main = () => {
-    const student = new Student(1, 'Vineeth', 'Pai')
+    try {
+        const teacher = new Teacher('John', 'Smith')
 
-    //all these properties are available
-
-    console.log(student.fullName);
+        console.log(teacher.fullName)
 
 
-    // student.firstName
-    // student.lastName
-    // student.fullName
-    // student.studentId
-    // student.takeTest()
-    // student.walk()
+    } catch (err) {
+        console.log(err)
+    }
+
+
+
 
 }
 
