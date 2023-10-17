@@ -1,49 +1,27 @@
 "use strict";
-//BASE
-class Person {
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-    get fullName() {
-        return this.firstName + ' ' + this.lastName;
-    }
-    walk() {
-        console.log('walking');
+class Shape {
+    constructor(color) {
+        this.color = color;
     }
 }
-//DERIVED 
-class Student extends Person {
-    constructor(studentId, firstName, lastName) {
-        super(firstName, lastName);
-        this.studentId = studentId;
+class Circle extends Shape {
+    constructor(radius, color) {
+        super(color);
+        this.radius = radius;
+    }
+    render() {
+        console.log('Rendering a circle');
     }
 }
-//DERIVED
-class Teacher extends Person {
-    get fullName() {
-        return 'Professor' + ' ' + super.fullName;
-    }
-}
-//DERIVED
-class Principal extends Person {
-    get fullName() {
-        return 'Principal' + ' ' + super.fullName;
-    }
-}
-const main = (people) => {
-    try {
-        for (let person of people) {
-            console.log(person.fullName);
-        }
-    }
-    catch (err) {
-        console.log(err);
-    }
+const main = () => {
+    // we cant do this - it doesnt make any sense
+    // shape render must need a definition
+    //so - we make it abstract 
+    //abstract is like an uncooked meal     
+    // const shape = new Shape('red')
+    // shape.render() 
+    const circle = new Circle(1.5);
+    console.log(circle, 'my-circle');
 };
-main([
-    new Student(1, 'Vineeth', 'Pai'),
-    new Teacher('John', 'Smith'),
-    new Principal('Mary', 'Doe')
-]);
+main();
 //# sourceMappingURL=index.js.map

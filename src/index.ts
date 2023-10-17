@@ -1,68 +1,41 @@
-//BASE
-class Person {
+abstract class Shape {
     constructor(
-        public firstName: string,
-        public lastName: string,
+        public color?: string,
     ) { }
 
-    get fullName(): string {
-        return this.firstName + ' ' + this.lastName
-    }
-
-    walk(): void {
-        console.log('walking')
-    }
-
+    //abstract method - can only exist in abstract method
+    abstract render(): void;
 }
 
-//DERIVED 
-class Student extends Person {
-
+class Circle extends Shape {
     constructor(
-        public studentId: number,
-        firstName: string,
-        lastName: string,
+        public radius: number,
+        color?: string
     ) {
-        super(firstName, lastName)
+        super(color)
+    }
+
+    override render(): void {
+        console.log('Rendering a circle');
     }
 }
 
+const main = () => {
 
-//DERIVED
+    // we cant do this - it doesnt make any sense
+    // shape render must need a definition
+    //so - we make it abstract 
 
-class Teacher extends Person {
+    //abstract is like an uncooked meal     
 
-    override get fullName(): string {
-        return 'Professor' + ' ' + super.fullName
-    }
+    // const shape = new Shape('red')
+    // shape.render() 
+
+
+    const circle = new Circle(1.5)
+    console.log(circle, 'my-circle')
+
+
 }
 
-//DERIVED
-
-class Principal extends Person {
-
-    override get fullName(): string {
-        return 'Principal' + ' ' + super.fullName
-    }
-}
-
-const main = (people: Person[]): void => {
-    try {
-
-        for (let person of people) {
-            console.log(person.fullName)
-        }
-
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-//fullName getter takes multiple forms
-main([
-    new Student(1, 'Vineeth', 'Pai'),
-    new Teacher('John', 'Smith'),
-    new Principal('Mary', 'Doe')
-])
-
-
+main()
