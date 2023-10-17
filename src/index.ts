@@ -1,15 +1,13 @@
 class Account {
 
-    readonly id: number;
-    owner: string;
-    private _balance: number;
     nickname?: string; //optional property - ?
 
-    constructor(id: number, owner: string, balance: number) {
-        this.id = id;
-        this.owner = owner;
-        this._balance = balance;
-    }
+    //access specifier to constructor parameter to reduce code
+    constructor(
+        public readonly id: number,
+        public owner: string,
+        private _balance: number
+    ) { }
 
     deposit(amount: number) {
         if (amount < 0)
