@@ -6,7 +6,7 @@ class Person {
     ) { }
 
     get fullName(): string {
-        return this.fullName + ' ' + this.lastName
+        return this.firstName + ' ' + this.lastName
     }
 
     walk(): void {
@@ -35,6 +35,9 @@ const main = () => {
     const student = new Student(1, 'Vineeth', 'Pai')
 
     //all these properties are available
+
+    console.log(student.fullName);
+
 
     // student.firstName
     // student.lastName

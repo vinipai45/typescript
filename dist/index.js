@@ -1,24 +1,37 @@
 "use strict";
-class Ride {
-    start() {
-        Ride._activeRides++;
+//BASE
+class Person {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-    stop() {
-        Ride._activeRides--;
+    get fullName() {
+        return this.firstName + ' ' + this.lastName;
     }
-    //make getter of static property static too
-    static get activeRides() {
-        return Ride._activeRides;
+    walk() {
+        console.log('walking');
     }
 }
-//static members are specific to class and not its objects
-Ride._activeRides = 0;
+//DERIVED
+class Student extends Person {
+    constructor(studentId, firstName, lastName) {
+        super(firstName, lastName);
+        this.studentId = studentId;
+    }
+    takeTest() {
+        console.log('taking a test');
+    }
+}
 const main = () => {
-    const ride1 = new Ride();
-    const ride2 = new Ride();
-    ride1.start();
-    ride2.start();
-    console.log(Ride.activeRides); // 2
+    const student = new Student(1, 'Vineeth', 'Pai');
+    //all these properties are available
+    console.log(student.fullName);
+    // student.firstName
+    // student.lastName
+    // student.fullName
+    // student.studentId
+    // student.takeTest()
+    // student.walk()
 };
 main();
 //# sourceMappingURL=index.js.map
