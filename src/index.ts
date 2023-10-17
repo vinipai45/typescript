@@ -15,6 +15,19 @@ class Person {
 
 }
 
+//DERIVED 
+class Student extends Person {
+
+    constructor(
+        public studentId: number,
+        firstName: string,
+        lastName: string,
+    ) {
+        super(firstName, lastName)
+    }
+}
+
+
 //DERIVED
 
 class Teacher extends Person {
@@ -24,22 +37,32 @@ class Teacher extends Person {
     }
 }
 
-const main = () => {
+//DERIVED
+
+class Principal extends Person {
+
+    override get fullName(): string {
+        return 'Principal' + ' ' + super.fullName
+    }
+}
+
+const main = (people: Person[]): void => {
     try {
-        const teacher = new Teacher('John', 'Smith')
 
-        console.log(teacher.fullName)
-
+        for (let person of people) {
+            console.log(person.fullName)
+        }
 
     } catch (err) {
         console.log(err)
     }
-
-
-
-
 }
 
-main()
+//fullName getter takes multiple forms
+main([
+    new Student(1, 'Vineeth', 'Pai'),
+    new Teacher('John', 'Smith'),
+    new Principal('Mary', 'Doe')
+])
 
 
