@@ -1,41 +1,42 @@
-abstract class Shape {
-    constructor(
-        public color?: string,
-    ) { }
+//abstract class - creates an explicit class on compiling in js
+// abstract class Calender {
+//     constructor(
+//         public name: string,
+//     ) { }
 
-    //abstract method - can only exist in abstract method
-    abstract render(): void;
+//     abstract addEvent(): void;
+//     abstract removeEvent(): void;
+// }
+
+//interface - for optimised compiling and js conversion
+
+//if there are any methods in base class that subclass needs to use - use abstract class
+//else if only signatures -  use interfaces
+
+interface Calender {
+    name: string;
+    addEvent(): void;
+    removeEvent(): void;
 }
 
-class Circle extends Shape {
-    constructor(
-        public radius: number,
-        color?: string
-    ) {
-        super(color)
+interface CloudCalendar extends Calender {
+    sync(): void;
+}
+
+class GoogleCalendar implements CloudCalendar {
+
+    constructor(public name: string) { }
+
+    sync(): void {
+        throw new Error("Method not implemented.");
     }
 
-    override render(): void {
-        console.log('Rendering a circle');
+    addEvent(): void {
+        throw new Error("Method not implemented.");
     }
-}
 
-const main = () => {
-
-    // we cant do this - it doesnt make any sense
-    // shape render must need a definition
-    //so - we make it abstract 
-
-    //abstract is like an uncooked meal     
-
-    // const shape = new Shape('red')
-    // shape.render() 
-
-
-    const circle = new Circle(1.5)
-    console.log(circle, 'my-circle')
-
+    removeEvent(): void {
+        throw new Error("Method not implemented.");
+    }
 
 }
-
-main()
