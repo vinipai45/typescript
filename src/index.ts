@@ -1,30 +1,27 @@
-//http://hostname/users - Users
-//http://hostname/products - Products
-
-interface APIResponse<T> {
-	data: T | null;
-	error: string | null;
-}
-
-interface Users {
-	username: string;
-	id: number;
-}
-
 interface Products {
-	productName: string;
+	name: string;
 	id: number;
 }
 
-const fetchAPI = <T>(url: string): APIResponse<T> => {
-	return {
-		data: null,
-		error: null,
-	};
-};
+class Store<T> {
+	private _objects: T[] = [];
 
-let usersRes = fetchAPI<Users>("url");
-let productsRes = fetchAPI<Products>("url");
+	addObjects(value: T): void {
+		this._objects.push(value);
+	}
 
-console.log(usersRes.data?.username);
-console.log(productsRes.data?.productName);
+	//T - Products
+	//keyof T  - name | id
+	findObject(property: keyof T, value: unknown): T | undefined {
+		return this._objects.find((obj) => obj[property] == value);
+	}
+}
+
+let store = new Store<Products>();
+store.addObjects({ name: "book", id: 1 });
+store.addObjects({ name: "pencil", id: 2 });
+
+//not a key of Products
+// store.findObject('price','book')
+
+store.findObject("name", "book");
