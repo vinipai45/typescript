@@ -1,14 +1,30 @@
-class ArrayUtils {
-	static wrapperInArray<T>(value: T) {
-		return [value];
-	}
+//http://hostname/users - Users
+//http://hostname/products - Products
+
+interface APIResponse<T> {
+	data: T | null;
+	error: string | null;
 }
 
-const main = () => {
-	//type of members are generic based on value passed
-	const kv1 = ArrayUtils.wrapperInArray(1);
+interface Users {
+	username: string;
+	id: number;
+}
 
-	console.log(kv1);
+interface Products {
+	productName: string;
+	id: number;
+}
+
+const fetchAPI = <T>(url: string): APIResponse<T> => {
+	return {
+		data: null,
+		error: null,
+	};
 };
 
-main();
+let usersRes = fetchAPI<Users>("url");
+let productsRes = fetchAPI<Products>("url");
+
+console.log(usersRes.data?.username);
+console.log(productsRes.data?.productName);
